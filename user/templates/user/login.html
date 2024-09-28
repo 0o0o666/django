@@ -13,7 +13,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         <label for="username">帳號</label>
-        <input type="text" placeholder="帳號" name="username" id="username"><br>
+        <input type="text" placeholder="帳號" name="username" id="username" value="{{user.username}}"><br>
         <label for="password">密碼</label>
         <input type="password" placeholder="密碼" name="password" id="password"><br>
         <p>

@@ -5,6 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 
 
+def user_logout(request):
+    logout(request)
+    return redirect("login")
+
+
+def user_profile(request):
+    return render(request, "user/profile.html")
+
+
 # Create your views here.
 
 
@@ -25,13 +34,14 @@ def user_login(request):
             if user:
                 message = "登入成功"
                 login(request, user)
+                return redirect("profile")
             else:
                 message = "帳號密碼錯誤-_-"
 
     return render(request, "user/login.html", {"message": message})
 
 
-def usre_register(request):
+def user_register(request):
     message = ""
     form = UserCreationForm()
     print(User.objects.filter(username="maan"))
@@ -59,6 +69,13 @@ def usre_register(request):
                 user = User.objects.create_user(username=username, password=password1)
                 user.save()
                 message = "註冊成功-_-"
+                return render(
+                    request,
+                    "user/login.html",
+                    {"user": user},
+                )
+
+                return redirect("login")
 
     return render(
         request,

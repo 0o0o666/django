@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar {
+            background-color: rgb(105, 242, 247);
+            padding: 5px;
+            text-align: left;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        #navbar a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        span {
+            font-size: 30px;
+        }
+
+
+        .btn {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            min-width: 20px;
+            background: #FFFFFF;
+            border: 2px solid goldenrod;
+            border-radius: 4px;
+            color: rgb(32, 150, 218);
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            transition: 0.5s;
+            padding: 1px 2px;
+        }
+
+        .btn span {
+            position: absolute;
+            width: 25%;
+            height: 100%;
+            background-color: rgb(17, 177, 240);
+            transform: translateY(150%);
+            border-radius: 50%;
+            left: calc((var(--n) - 1) * 25%);
+            transition: 0.5s;
+            transition-delay: calc((var(--n) - 1) * 0.1s);
+            z-index: -1;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            color: black;
+        }
+
+        .btn:hover span {
+            transform: translateY(0) scale(2);
+        }
+
+        .btn span:nth-child(1) {
+            --n: 1;
+        }
+
+        .btn span:nth-child(2) {
+            --n: 2;
+        }
+
+        .btn span:nth-child(3) {
+            --n: 3;
+        }
+
+        .btn span:nth-child(4) {
+            --n: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        {% if user.is_authenticated %}
+        <span>{{user.username}}</span>
+
+
+        <a href="{% url 'logout' %}" class="btn">
+            登出
+            <span></span><span></span><span></span><span></span>
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn">
+            登入
+            <span></span><span></span><span></span><span></span>
+        </a>
+
+        <a href="{% url 'register' %}" class="btn">
+            註冊
+            <span></span><span></span><span></span><span></span>
+        </a>
+        {% endif %}
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+    <div style="color: red;">{{message}}</div>
+
+
+
+
+</body>
+
+</html>

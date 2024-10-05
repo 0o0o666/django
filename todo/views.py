@@ -22,6 +22,8 @@ def create_todo(request):
                 form = TodoForm(request.POST)
                 todo = form.save(commit=False)
                 todo.user = request.user
+                now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                todo.date_completed = now if todo.completed else None
                 todo.save()
                 message = "提交成功"
                 messages.success(request, "提交成功")
@@ -62,6 +64,27 @@ def todolist(request):
     user = request.user
     todos = None
     if user.is_authenticated:
-        todos = Todo.objects.filter(user=user).order_by("-id")
+        todos = Todo.objects.filter(user=user)
     print(todos)
     return render(request, "todo/todolist.html", {"todos": todos})
+
+
+def delete_todo(request, id):
+    user = request.user
+    todo = None
+    try:
+        todo = Todo.objects.get(id=id, user=user)
+        todo.delete()
+    except Exception as e:
+        print(e)
+        message = "編碼錯誤"
+    return redirect("todolist")
+
+
+def completed(request):
+    user = request.user
+    todos = None
+    if user.is_authenticated:
+        todos = Todo.objects.filter(user=user)
+    print(todos)
+    return render(request, "todo/completed.html", {"todos": todos})

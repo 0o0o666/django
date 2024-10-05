@@ -58,49 +58,32 @@
 {% endblock %}
 
 {% block content %}
-<h1>Todolist</h1>
-
+<h1>completed</h1>
 
 {% for todo in todos %}
 
 
 
-{% if not todo.completed %}
+{% if todo.completed %}
 {% if todo.important %}
 
 <div class="todo y">
-    <a class="delete" href="{% url 'delete-todo' todo.id %}" onclick="return confirm('確定刪除')">刪除</a>
-    <div>{{message}}</div>
     <div id="created">{{ todo.created }}</div>
-
     <div id="title">
         <a href="{% url 'todo' todo.id %}">
             {{ todo.title }}
         </a>
     </div>
-
     <div id="text">{{ todo.text|linebreaksbr }}</div>
     <div class="imp">
         <span class="imp" style="color:rgb(0, 0, 0)">重要 </span>
 
 
     </div>
-    <div>
-        {% if todo.date_completed %}
-        <span class="progress" style="color:blue">更新於{{todo.date_completed}}</span>
-        {% else %}
-        <span class="progress">進行中</span>
-        {% endif %}
-    </div>
 </div>
-
-
-
 
 {% else %}
 <div class="todo n">
-    <a class="delete" href="{% url 'delete-todo' todo.id %}" onclick="return confirm('確定刪除')">刪除</a>
-    <div>{{message}}</div>
     <div id="created">{{ todo.created }}</div>
 
     <div id="title">
@@ -114,13 +97,6 @@
         <span class="imp" style="color:rgb(68, 0, 255)">一般 </span>
 
 
-    </div>
-    <div>
-        {% if todo.date_completed %}
-        <span class="progress" style="color:blue">更新於{{todo.date_completed}}</span>
-        {% else %}
-        <span class="progress">進行中</span>
-        {% endif %}
     </div>
 </div>
 

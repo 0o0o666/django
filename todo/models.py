@@ -13,5 +13,9 @@ class Todo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
 
+    # 排序
+    class Meta:
+        ordering = ["-created"]
+
     def __str__(self):
         return f"{self.id}-{self.title}-{self.created}"

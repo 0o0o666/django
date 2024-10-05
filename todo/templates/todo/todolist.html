@@ -33,6 +33,11 @@
         #created {
             font-size: 15px;
         }
+
+        .progress {
+
+            font-size: 20px;
+        }
     </style>
 
 
@@ -57,10 +62,22 @@
 
     <div id="text">{{ todo.text|linebreaksbr }}</div>
     <div class="imp">
+
+
+
+
         {% if todo.important %}
         <span class="imp" style="color:red">重要 </span>
         {% else %}
         <span class="imp" style="color:rgb(68, 0, 255)">一般 </span>
+        {% endif %}
+
+    </div>
+    <div>
+        {% if todo.date_completed %}
+        <span class="progress" style="color:blue">{{todo.date_completed}}</span>
+        {% else %}
+        <span class="progress">進行中</span>
         {% endif %}
     </div>
 </div>

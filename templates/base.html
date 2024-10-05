@@ -92,7 +92,9 @@
 <body>
     <div id="navbar">
         {% if user.is_authenticated %}
-        <span>{{user.username}}</span>
+        <a href="{% url 'profile' %}">
+            <span>{{user.username}}</span>
+        </a>
 
 
         <a href="{% url 'logout' %}" class="btn">
@@ -110,7 +112,7 @@
             <span></span><span></span><span></span><span></span>
         </a>
         {% endif %}
-        <a href="http://127.0.0.1:8000/user/" class="btn">
+        <a href="{% url 'todolist' %}" class="btn">
             回首頁
             <span></span><span></span><span></span><span></span>
         </a>

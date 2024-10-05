@@ -12,6 +12,10 @@
             box-sizing: border-box;
         }
 
+        body {
+            background-color: rgb(138, 184, 236);
+        }
+
         #navbar {
             background-color: rgb(105, 242, 247);
             padding: 5px;
@@ -86,7 +90,14 @@
         .btn span:nth-child(4) {
             --n: 4;
         }
+
+        #cnotainer {
+            text-align: center;
+
+        }
     </style>
+    {% block style %}
+    {% endblock %}
 </head>
 
 <body>
@@ -99,6 +110,10 @@
 
         <a href="{% url 'logout' %}" class="btn">
             登出
+            <span></span><span></span><span></span><span></span>
+        </a>
+        <a href="{% url 'cteate-todo' %}" class="btn">
+            建立
             <span></span><span></span><span></span><span></span>
         </a>
         {% else %}
@@ -117,13 +132,13 @@
             <span></span><span></span><span></span><span></span>
         </a>
     </div>
+    <div id="cnotainer">
+        {% block content %}
 
-    {% block content %}
+        {% endblock %}
+        <div style="color: red;">{{message}}</div>
 
-    {% endblock %}
-    <div style="color: red;">{{message}}</div>
-
-
+    </div>
 
 
 </body>

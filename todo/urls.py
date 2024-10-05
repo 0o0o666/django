@@ -19,5 +19,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("cteate-todo/", views.create_todo, name="cteate-todo"),
+    path("todo/<int:id>", views.todo, name="todo"),
     path("", views.todolist, name="todolist"),
 ]
